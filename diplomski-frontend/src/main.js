@@ -33,6 +33,7 @@ import Panel from 'primevue/panel';
 import ScrollTop from 'primevue/scrolltop';
 import Dialog from 'primevue/dialog';
 import Message from 'primevue/message';
+import Menu from 'primevue/menu';
 app.component('Button', Button)
 app.component('Menubar', Menubar)
 app.component('TabMenu', TabMenu)
@@ -50,6 +51,7 @@ app.component('Panel', Panel)
 app.component('ScrollTop', ScrollTop)
 app.component('Dialog', Dialog)
 app.component('Message', Message)
+app.component('Menu', Menu)
 
 app.use(ToastService)
 app.use(ConfirmationService)

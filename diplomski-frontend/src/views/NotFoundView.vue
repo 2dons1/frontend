@@ -29,7 +29,7 @@ export default {
     display: flex;
     justify-content: center;
     margin: auto;
-    color: #6366F1;
+    color: #22C55E;
 }
 
 </style>

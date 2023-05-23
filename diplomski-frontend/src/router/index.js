@@ -7,7 +7,9 @@ import RegisterView from '../views/RegisterView.vue'
 import LoginView from '../views/LoginView.vue'
 import TestView from '../views/TestView.vue'
 import SingularTestView from '../views/SingularTestView.vue'
+import LocationsView from '../views/LocationsView.vue'
 
+// TODO: protect routes, only a user with a certain role should be able to access some routes.
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -15,11 +17,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
-    },
-    {
-      path: '/calendar',
-      name: 'calendar',
-      component: CalendarView
     },
     {
       path: '/register',
@@ -30,6 +27,16 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LoginView,
+    },
+    {
+      path: '/locations',
+      name: 'locations',
+      component: LocationsView,
+    },
+    {
+      path: '/calendar',
+      name: 'calendar',
+      component: CalendarView
     },
     {
       path: '/test',

@@ -1,7 +1,6 @@
 <template>
 
     <div class="container">
-
         <!-- Search bar -->
         <div class="search">
             <span class="p-input-icon-left" style="margin-bottom: 10px;">

@@ -51,7 +51,7 @@ export default {
             password: "",
             selectedRole: null,
             error: null,
-            roles: [ // TODO: Povuci ovo iz baze.
+            roles: [ // TODO: Povuci ovo iz baze, ili mozda ne.
                 { name: "Zaposlenik" },
                 { name: "Investitor" }
             ]
@@ -62,7 +62,8 @@ export default {
             try{
                 const response = await AuthtenticationService.register({
                     email: this.email,
-                    password: this.password
+                    password: this.password,
+                    role: this.isSelected()
                 })
                 // Success
                 this.$store.dispatch('setToken', response.data.token)
@@ -73,10 +74,19 @@ export default {
             catch(error){
                 // Failed
                 this.error = error.response.data.error
-                this.$toast.add({ severity: 'error', summary: 'Error', detail: this.error, life: 1000 });
+                this.$toast.add({ severity: 'error', summary: 'Error', detail: this.error, life: 1500 });
             }
             
         },
+        // Wrote this because role can be not selected and then .toLowerCase() on null throws stuff.
+        isSelected(){
+            if(this.selectedRole){
+                return this.selectedRole.name.toLowerCase()
+            }
+            else{
+                return 'invalid'
+            }
+        }
     }
 }
 </script>
