@@ -1,6 +1,6 @@
 <template>
         <div class="card relative z-2">
-            <Menubar :model="items">
+            <Menubar class="sticky-menu">
 
                 <template #start>
 
@@ -8,21 +8,49 @@
                         <img alt="logo" src="/alarm.png" height="40" class="mr-2" />
                     </span>
 
-                    <span v-if="$store.state.isUserLoggedIn">
-                        <span class="navbtn" @click="navigateTo({name: 'calendar'})">
-                            <Button severity="success" :class="this.$route.path == '/calendar' ? 'activeroute' : 'route'" label="Calendar" icon="pi pi-fw pi-calendar"></Button>
-                        </span>
-                    </span>
-
-                    <span v-if="$store.state.isUserLoggedIn">
-                        <span class="navbtn" @click="navigateTo({name: 'test'})" v-if="$store.state.user.role == 'admin'">
-                            <Button severity="success" :class="this.$route.path == '/test' ? 'activeroute' : 'route'" label="Test" icon="pi pi pi-fw pi-database"></Button>
-                        </span>
-                    </span>
-
+                    <!-- Investitor. -->
                     <span v-if="$store.state.isUserLoggedIn">
                         <span class="navbtn" @click="navigateTo({name: 'locations'})" v-if="$store.state.user.role == 'investitor'">
-                            <Button severity="success" :class="this.$route.path == '/locations' ? 'activeroute' : 'route'" label="Locations" icon="pi pi pi-fw pi-map"></Button>
+                            <Button severity="success" :class="this.$route.path == '/locations' ? 'activeroute' : 'route'" label="Moji objekti" icon="pi pi pi-fw pi-building"></Button>
+                        </span>
+                    </span>
+
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'reports'})" v-if="$store.state.user.role == 'investitor'">
+                            <Button badge="" badgeClass="p-badge-success" severity="success" :class="this.$route.path == '/reports' ? 'activeroute' : 'route'" label="Prijavljeni problemi" icon="pi pi pi-fw pi-exclamation-triangle"></Button>
+                        </span>
+                    </span>
+
+                    <!-- Admin. -->
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'locations-all'})" v-if="$store.state.user.role == 'admin'">
+                            <Button severity="success" :class="this.$route.path == '/locations-all' ? 'activeroute' : 'route'" label="Svi objekti" icon="pi pi pi-fw pi-building"></Button>
+                        </span>
+                    </span>
+
+                    
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'reports-all'})" v-if="$store.state.user.role == 'admin'">
+                            <Button severity="success" :class="this.$route.path == '/reports-all' ? 'activeroute' : 'route'" label="Svi prijavljeni problemi" icon="pi pi pi-fw pi-exclamation-triangle"></Button>
+                        </span>
+                    </span>
+
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'assignments-all'})" v-if="$store.state.user.role == 'admin'">
+                            <Button severity="success" :class="this.$route.path == '/assignments-all' ? 'activeroute' : 'route'" label="Svi radni zadaci" icon="pi pi pi-fw pi-briefcase"></Button>
+                        </span>
+                    </span>
+
+                    <!-- Worker. -->
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'assignments'})" v-if="$store.state.user.role == 'zaposlenik'">
+                            <Button severity="success" :class="this.$route.path == '/assignments' ? 'activeroute' : 'route'" label="Moji zadaci" icon="pi pi pi-fw pi-briefcase"></Button>
+                        </span>
+                    </span>
+
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'calendar'})" v-if="$store.state.user.role == 'zaposlenik'">
+                            <Button severity="success" :class="this.$route.path == '/calendar' ? 'activeroute' : 'route'" label="Kalendar" icon="pi pi pi-fw pi-calendar"></Button>
                         </span>
                     </span>
 
@@ -31,17 +59,35 @@
 
                 <template #end>
 
-                    <span class="end" @click="logout($event)" v-if="$store.state.isUserLoggedIn">
-                        <i class="pi pi-power-off" style="font-size: 1.5rem"></i>
-                        <ConfirmPopup></ConfirmPopup>
+                    <!-- User details -->
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="user">
+                            <Button severity="success" class="user" icon="pi pi pi-fw pi-user" :label="this.formatName($store.state.user.email) + ' (' + $store.state.user.role + ')'" ></Button>
+                        </span>
                     </span>
 
-                    <span class="end" @click="navigateTo({name: 'login'})" v-if="!$store.state.isUserLoggedIn" >
-                        <i class="pi pi-sign-in" style="font-size: 1.5rem"></i>
+                    <!-- Logout -->
+                    <span v-if="$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="logout($event)">
+                            <Button severity="success" class="auth" label="Odjava" icon="pi pi pi-fw pi-power-off"></Button>
+                            <ConfirmPopup></ConfirmPopup>
+                        </span>
                     </span>
 
-                    <span class="end" @click="navigateTo({name: 'register'})" v-if="!$store.state.isUserLoggedIn">
-                        <i class="pi pi-user-plus" style="font-size: 1.5rem"></i>
+                     <!-- Login -->
+                    <span v-if="!$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'login'})">
+                            <Button severity="success" class="auth" label="Prijava" icon="pi pi pi-fw pi-sign-in"></Button>
+                            <ConfirmPopup></ConfirmPopup>
+                        </span>
+                    </span>
+
+                     <!-- Register -->
+                    <span v-if="!$store.state.isUserLoggedIn">
+                        <span class="navbtn" @click="navigateTo({name: 'register'})">
+                            <Button severity="success" class="auth" label="Registracija" icon="pi pi pi-fw pi-user-plus"></Button>
+                            <ConfirmPopup></ConfirmPopup>
+                        </span>
                     </span>
                     
                 </template>
@@ -59,18 +105,6 @@ export default {
   data() {
     return {
         active: 0,
-        items: [ /*
-                {
-                    label: 'Calendar',
-                    icon: 'pi pi-fw pi-calendar',
-                    to: '/calendar'
-                },
-                {
-                    label: 'Test',
-                    icon: 'pi pi-fw pi-database',
-                    to: '/test'
-                }, */
-        ]
     }
   },
   methods: {
@@ -98,7 +132,15 @@ export default {
                     // Do nothing.
                 }
             });
-        },
+    },
+    formatName(email) {
+        var nameParts = email.split('@')[0].split('.')
+        var firstName = nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1)
+        var lastNameInitial = nameParts[nameParts.length - 1].charAt(0).toUpperCase()
+        var formattedName = firstName + ' ' + lastNameInitial
+
+        return formattedName;
+    }
   },
 
 }
@@ -128,7 +170,22 @@ export default {
     margin-right: 1rem;
     background-color: #F8F9FA !important;
     color: grey !important;
+    border: none !important;
+}
 
+.user{
+    cursor: default !important;
+    margin-right: 1rem;
+    background-color: #F8F9FA !important;
+    color: grey !important;
+    border: none !important;
+}
+
+.auth{
+    cursor: pointer;
+    margin-right: 1rem;
+    background-color: #F8F9FA !important;
+    color: grey !important;
     border: none !important;
 }
 
@@ -156,6 +213,12 @@ export default {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.sticky-menu{
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
 </style>

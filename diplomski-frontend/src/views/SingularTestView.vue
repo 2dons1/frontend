@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TestService from '../services/TestService';
+
 
 export default {
     name: 'SingularTestView',
@@ -21,11 +21,6 @@ export default {
     methods: {
 
     },
-    async mounted () {
-        const songId = this.$route.params.songId
-        this.song = (await TestService.show(songId)).data
-        console.log(this.song)
-    }
 }
 </script>
 

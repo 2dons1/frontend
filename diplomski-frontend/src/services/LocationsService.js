@@ -2,7 +2,6 @@ import Api from '@/services/Api'
 
 export default {
 
-    // TODO: delete(maybe not).
     getAll () {
         return Api().get('locations/all')
     },

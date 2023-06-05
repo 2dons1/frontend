@@ -1,15 +1,15 @@
 <template lang="">
-    <h1 class="img">404 - NotFound</h1>
+    <h1 class="img">403 - Forbidden</h1>
     <div class="card flex justify-content-center">
         <div class="img">
-            <Image src="https://i.pinimg.com/originals/dc/65/58/dc655846d83725021c0fa9b95fc47323.jpg" alt="Not Found" width="1000"/>
+            <Image src="https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg" alt="Forbidden" width="1000"/>
         </div> 
     </div>
 </template>
 
 <script>
 export default {
-    name: 'NotFound',
+    name: 'Forbidden',
     components: {
 
     },

@@ -34,6 +34,14 @@ import ScrollTop from 'primevue/scrolltop';
 import Dialog from 'primevue/dialog';
 import Message from 'primevue/message';
 import Menu from 'primevue/menu';
+import Card from 'primevue/card';
+import Accordion from 'primevue/accordion';
+import AccordionTab from 'primevue/accordiontab';
+import Divider from 'primevue/divider';
+import Chips from 'primevue/chips';
+import Calendar from 'primevue/calendar';
+import Textarea from 'primevue/textarea';
+import MultiSelect from 'primevue/multiselect';
 app.component('Button', Button)
 app.component('Menubar', Menubar)
 app.component('TabMenu', TabMenu)
@@ -52,6 +60,14 @@ app.component('ScrollTop', ScrollTop)
 app.component('Dialog', Dialog)
 app.component('Message', Message)
 app.component('Menu', Menu)
+app.component('Card', Card)
+app.component('Accordion', Accordion)
+app.component('AccordionTab', AccordionTab)
+app.component('Divider', Divider)
+app.component('Chips', Chips)
+app.component('Calendar', Calendar)
+app.component('Textarea', Textarea)
+app.component('MultiSelect', MultiSelect)
 
 app.use(ToastService)
 app.use(ConfirmationService)

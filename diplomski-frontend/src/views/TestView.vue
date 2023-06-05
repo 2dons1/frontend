@@ -85,8 +85,6 @@
 </template>
 
 <script>
-import TestService from '@/services/TestService'
-
 export default {
     name: 'TestView',
     components: {
@@ -137,8 +135,6 @@ export default {
         }
     },
     async mounted(){
-        // API calls go here.
-        this.tests = (await TestService.index()).data;
 
     },
     computed: {
