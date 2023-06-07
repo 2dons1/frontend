@@ -1,11 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '../store/store.js'
 
-import HomeView from '../views/HomeView.vue'
-import RegisterView from '../views/RegisterView.vue'
-import LoginView from '../views/LoginView.vue'
-import NotFoundView from '../views/NotFoundView.vue' 
-import ForbiddenView from '../views/ForbiddenView.vue'
+// Auth
+import LoginView from '../views/Auth/LoginView.vue'
+import RegisterView from '../views/Auth/RegisterView.vue'
 
 // Investor
 import LocationsView from '../views/Investor/LocationsView.vue'
@@ -18,9 +16,13 @@ import AllAssignmentsView from '../views/Admin/AllAssignmentsView.vue'
 
 // Worker
 import AssignmentsView from '../views/Worker/AssignmentsView.vue'
-import CalendarView from '../views/CalendarView.vue'
+import CalendarView from '../views/Worker/CalendarView.vue'
 
-// TODO: protect routes, only a user with a certain role should be able to access some routes.
+// Other
+import HomeView from '../views/Other/HomeView.vue'
+import NotFoundView from '../views/Other/NotFoundView.vue' 
+import ForbiddenView from '../views/Other/ForbiddenView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -104,6 +106,7 @@ const router = createRouter({
   ]
 })
 
+// Protect the route.
 router.beforeEach((to, from, next) => {
   if(to.meta.requiresAuth) {
     // Check if user is logged in first.

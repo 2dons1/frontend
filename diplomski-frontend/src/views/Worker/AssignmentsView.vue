@@ -52,7 +52,10 @@
 
                 <!-- Footer -->
                 <div v-if="assignment.Report.remark">
-                    <p> <b>Napomena izvođača: </b> <br>{{ assignment.Report.remark }}</p>
+                    <p> <b>Napomene izvođača: </b> <br></p>
+                    <div v-for="r in assignment.Report.remark.split(';')">
+                      <p> {{ r }} </p>
+                    </div>
                 </div>
                 <div v-else>
                     <p> <b>Nema napomene!</b></p>
@@ -61,7 +64,7 @@
                 <!-- Footer -->
                 <div>
                     <div class="footer">
-                        <Button style="margin-right: 0.5rem;" v-if="!assignment.Report.remark" label="Napiši napomenu" icon="pi pi-comment" severity="secondary" 
+                        <Button style="margin-right: 0.5rem;" label="Napiši napomenu" icon="pi pi-comment" severity="secondary" 
                             aria-label="Create Assignment" @click="openRemarkForm(assignment)"></Button>
                         <Button label="Promijeni status" icon="pi pi-tag" severity="success" 
                             aria-label="Change status" @click="openChangeStatusForm(assignment)"></Button>
