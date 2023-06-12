@@ -16,12 +16,17 @@
 
                 <Divider></Divider>
 
+                <!-- Footer -->
                 <div v-if="report.remark">
-                    <p> <b>Napomena izvođača: </b> <br>{{ report.remark }}</p>
+                    <p> <b>Napomene izvođača: </b> <br></p>
+                    <div v-for="r in report.remark.split(';')">
+                      <p> {{ r }} </p>
+                    </div>
                 </div>
                 <div v-else>
-                    <p><b>Nema napomene!</b></p>
+                    <p> <b>Nema napomene!</b></p>
                 </div>
+
             </AccordionTab>
         </Accordion>
     </div>

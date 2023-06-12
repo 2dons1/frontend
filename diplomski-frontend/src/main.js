@@ -4,6 +4,7 @@ import router from './router'
 import PrimeVue from 'primevue/config'
 import store from '@/store/store'
 import Vuex from 'vuex'
+import './registerServiceWorker'
 
 // PRIME VUE - CSS
 import "primevue/resources/themes/lara-light-indigo/theme.css";
@@ -42,6 +43,7 @@ import Chips from 'primevue/chips';
 import Calendar from 'primevue/calendar';
 import Textarea from 'primevue/textarea';
 import MultiSelect from 'primevue/multiselect';
+import './registerServiceWorker'
 app.component('Button', Button)
 app.component('Menubar', Menubar)
 app.component('TabMenu', TabMenu)

@@ -103,6 +103,7 @@ import AssignmentService from '@/services/AssignmentService'
 import ReportService from '@/services/ReportService'
 import UserService from '@/services/UserService'
 import EquipmentService from '@/services/EquipmentService'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'AllReportsView',
@@ -195,6 +196,13 @@ export default {
                     await ReportService.changeStatus({
                         reportId: this.lastReport.id,
                         status: "u radu"
+                    })
+
+                    // Send email to owner that new assignment based on its problem has been created.
+                    await NotificationService.sendEmail({
+                        recipient: "dorian.doncevic@fer.hr", // Ovo kasnije mijenjamo
+                        subject: "AAScheduler - Zaprimljen problem",
+                        message: "Zaprimili smo vas prijavljeni problem za lokaciju: " + this.lastReport.Location.name + " i kreiran je radni zadatak!"
                     })
 
                     // Close The Report Dialog.

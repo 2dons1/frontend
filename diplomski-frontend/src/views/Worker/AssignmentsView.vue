@@ -86,7 +86,7 @@
                             <span class="p-inputgroup-addon">
                                 <i class="pi pi-comment"></i>
                             </span>
-                            <InputText v-model="this.remark"/>
+                            <InputText v-model="this.remark" placeholder="Napiši napomenu..."/>
                         </div> 
 
                     </div>
@@ -133,6 +133,7 @@
 <script>
 import AssignmentService from '@/services/AssignmentService'
 import ReportService from '@/services/ReportService'
+import NotificationService from '@/services/NotificationService'
 
 export default {
     name: 'AssignmentsView',
@@ -159,11 +160,17 @@ export default {
     methods: {
         async postRemark(){
             try{
-                const report = (await ReportService.postRemark(
-                    {
-                        reportId: this.lastAssignment.ReportId,
-                        remark: this.remark 
-                    }))
+                const report = (await ReportService.postRemark({
+                    reportId: this.lastAssignment.ReportId,
+                    remark: this.remark 
+                }))
+
+                // Send email to owner that new assignment based on its problem has been created.
+                await NotificationService.sendEmail({
+                    recipient: "dorian.doncevic@fer.hr", // Ovo kasnije mijenjamo
+                    subject: "AAScheduler - Nova napomena za lokaciju!",
+                    message: "Djelatnik je napisao napomenu na Vašu prijavu problema: " + "'" + this.remark + "'"
+                })
 
                 // Close The Report Dialog.
                 this.visible = false

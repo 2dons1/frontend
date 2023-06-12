@@ -85,9 +85,9 @@
         <div>
         <div class="footer">
             <Button style="margin-right: 0.5rem;" label="Napiši napomenu" icon="pi pi-comment" severity="secondary" 
-                aria-label="Create Assignment" @click="openRemarkForm(currentAssignment)"></Button>
+                aria-label="Create Assignment" @click="openRemarkForm()"></Button>
             <Button label="Promijeni status" icon="pi pi-tag" severity="success" 
-                aria-label="Change status" @click="openChangeStatusForm(currentAssignment)"></Button>
+                aria-label="Change status" @click="openChangeStatusForm()"></Button>
         </div>
       </div>
     </Dialog>
@@ -150,6 +150,7 @@
   <script>
   import AssignmentService from '@/services/AssignmentService'
   import ReportService from '@/services/ReportService'
+  import NotificationService from '../../services/NotificationService';
 
   export default {
     data() {
@@ -216,6 +217,13 @@
               reportId: this.currentAssignment.ReportId,
               remark: this.remark 
             }))
+
+          // Send email to owner that new assignment based on its problem has been created.
+          await NotificationService.sendEmail({
+              recipient: "dorian.doncevic@fer.hr", // Ovo kasnije mijenjamo
+              subject: "AAScheduler - Nova napomena za lokaciju!",
+              message: "Djelatnik je napisao napomenu na Vašu prijavu problema: " + "'" + this.remark + "'"
+          })
 
           // Close The Report Dialog.
           this.visible_remark_form = false
@@ -302,7 +310,7 @@
         if (tasks.length > 0) {
           this.currentAssignment = tasks[0];
           this.visible = true
-        } 
+        }
       },
       transformDate(dateString){
         var parts = dateString.split('-');
@@ -363,7 +371,7 @@
   }
   
   .outside-month {
-    color: rgb(128, 128, 128);
+    color: rgba(128, 128, 128, 0.315);
     /*text-decoration: line-through; */
   }
   
